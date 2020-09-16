@@ -21,7 +21,17 @@ class StudentsController < ApplicationController
   end
 
   def index
-    @students = Student.all
+    if params[:query]
+      @students = Student.search(params[:query])
+    else
+      @students = Student.all
+    end
+    # student = Student.find_by(name: params.require(:query))
+    # if student
+    #   redirect_to student_path(student)
+    # else
+    #   render 'index'
+    # end
   end
 
   def student_params
